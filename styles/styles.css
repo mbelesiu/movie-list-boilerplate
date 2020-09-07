@@ -1,0 +1,13 @@
+body {
+  background-color: blanchedalmond;
+}
+
+.movie-entry {
+  border-style: solid;
+}
+
+.movie-list {
+
+  border-style: solid;
+  border-color: black;
+}
