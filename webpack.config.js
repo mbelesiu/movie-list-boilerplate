@@ -1,10 +1,14 @@
+const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-  entry: path.resolve(__dirname, 'client', 'src', 'index.js'),
+  entry: {
+    './dist/app': path.resolve(__dirname, 'client', 'src', 'index.js')
+  },
   output: {
-    path: path.resolve(__dirname, 'public'),
-    filename: 'bundle.js'
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, './')
+
   },
   module: {
     rules: [
@@ -25,5 +29,10 @@ module.exports = {
   mode: 'development',
   resolve: {
     extensions: ['.js', '.jsx']
+  },
+  externals: {
+    'react/addons': true, // important!!
+    'react/lib/ReactContext': true,
+    'react/lib/ExecutionEnvironment': true
   }
 };
