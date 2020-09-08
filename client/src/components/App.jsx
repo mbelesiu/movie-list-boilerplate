@@ -10,9 +10,36 @@ class App extends React.Component {
     this.state = {
       masterMovieList: this.props.movies || [],
       currentMovieList: this.props.movies || [],
-      found: true
+      watchedMovieList: [],
+      found: true,
+      watchedTab: false
     };
 
+  }
+
+  handleWatchedTab(watch) {
+    this.setState({
+      watchedTab: watch
+    });
+  }
+
+  handleWatchedMovieList(e, movie) {
+    let flag = false;
+    this.state.watchedMovieList.forEach((element) => {
+
+      if (element.title.toLowerCase() === movie.title.toLowerCase()) {
+        alert('Movie is already in list');
+        flag = true;
+      }
+    });
+
+    if (flag) {
+      return;
+    }
+
+    this.setState((prevState) => ({
+      watchedMovieList: [movie, ...prevState.watchedMovieList]
+    }));
   }
 
 
@@ -66,7 +93,7 @@ class App extends React.Component {
     });
 
 
-    if(flag) {
+    if (flag) {
       return;
     }
 
@@ -75,7 +102,7 @@ class App extends React.Component {
       director: 'placerholder',
       release_date: 'placerholder'
     };
-    this.setState( prevState => ({
+    this.setState(prevState => ({
       masterMovieList: [newMovie, ...prevState.masterMovieList],
       currentMovieList: [newMovie, ...prevState.masterMovieList]
     }));
@@ -87,18 +114,29 @@ class App extends React.Component {
     return (<div className='body-container'>
       <h1 className='app-title'>Matt's Movie List</h1>
 
+
+
       <Search handleSearchChange={
         this.handleSearchChange.bind(this)}
         isFound={this.state.found}
       />
-
       <MoiveAdder
         handleNewMovie={this.handleNewMovie.bind(this)}
       />
 
+      <div>
+        {this.state.watchedTab ? (
+          <MoiveList
+            movies={this.state.watchedMovieList}
+            handleWatchedTab = {this.handleWatchedTab.bind(this)}
+          />) : <MoiveList
+            movies={this.state.currentMovieList}
+            handleWatchedMovieList={this.handleWatchedMovieList.bind(this)}
+            handleWatchedTab = {this.handleWatchedTab.bind(this)}
+          />}
 
-      <MoiveList movies={this.state.currentMovieList} />
 
+      </div>
 
 
 

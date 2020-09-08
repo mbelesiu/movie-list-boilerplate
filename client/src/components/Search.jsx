@@ -35,6 +35,7 @@ class Search extends React.Component {
           onKeyDown={this.handleSubmit.bind(this)}
         />
         <button onClick={this.handleSubmit.bind(this)}>Search</button>
+
         <div className='results_found'>{!(this.props.isFound) && <p>Sorry, The moive title you have searched for is not on this list</p>}</div>
       </nav>
     )

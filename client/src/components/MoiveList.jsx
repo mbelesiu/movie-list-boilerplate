@@ -1,16 +1,19 @@
 import React from 'react';
 import MoiveListEntires from './MoiveListEntires.jsx';
+import WatchedTab from './WatchedTab.jsx';
 import PropTypes from 'prop-types';
 
-var MovieList = ({ movies }) => (
+var MovieList = ({ movies, handleWatchedMovieList, handleWatchedTab}) => (
   <div className='movie-list'>
-    <p></p>
+    <WatchedTab handleWatchedTab = {handleWatchedTab}/>
     <ul>
       {movies.map((movies) =>
 
-          <MoiveListEntires
-            key = {movies.title}
-            movie = {movies} />
+        <MoiveListEntires
+          key={movies.title}
+          movie={movies}
+          handleWatchedMovieList = {handleWatchedMovieList}
+          />
 
       )}
     </ul>
