@@ -19,7 +19,7 @@ class App extends React.Component {
   handleSearchChange(searchTerm) {
     if (searchTerm === '' || null || undefined) {
       this.setState({
-        currentMovieList: this.props.movies || [],
+        currentMovieList: this.state.masterMovieList,
         found: true
       });
       return;
@@ -51,7 +51,35 @@ class App extends React.Component {
 
 
   handleNewMovie(newMovie) {
-    alert('I DO NOTHING');
+
+    if (!newMovie) {
+      return;
+    }
+    let flag = false;
+
+    this.state.masterMovieList.forEach((element) => {
+
+      if (element.title.toLowerCase() === newMovie.toLowerCase()) {
+        alert('Movie is already in list');
+        flag = true;
+      }
+    });
+
+
+    if(flag) {
+      return;
+    }
+
+    newMovie = {
+      title: newMovie,
+      director: 'placerholder',
+      release_date: 'placerholder'
+    };
+    this.setState( prevState => ({
+      masterMovieList: [newMovie, ...prevState.masterMovieList],
+      currentMovieList: [newMovie, ...prevState.masterMovieList]
+    }));
+
   }
 
 
@@ -66,7 +94,6 @@ class App extends React.Component {
 
       <MoiveAdder
         handleNewMovie={this.handleNewMovie.bind(this)}
-        moiveList={this.state.masterMovieList}
       />
 
 
