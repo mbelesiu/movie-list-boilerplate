@@ -1,6 +1,7 @@
 import React from 'react';
 
-class Search extends React.Component {
+class MoiveAdder extends React.Component {
+
   constructor(props) {
     super(props);
 
@@ -10,7 +11,7 @@ class Search extends React.Component {
   }
 
   handleInputChange(e) {
-    //console.log(e.target.value);
+
     this.setState({
       value: e.target.value
     });
@@ -21,26 +22,27 @@ class Search extends React.Component {
     if (e.type === 'click' || e.key === 'Enter') {
       console.log(this.state.value);
 
-      this.props.handleSearchChange(this.state.value);
+      this.props.handleNewMovie(this.state.value);
     }
   }
 
   render() {
     return (
-      <nav className='nav-bar'>
+      <div className='moive-adder'>
         <input
           type='text'
-          placeholder='Search by Movie Title'
+          placeholder='Add Movies by Title'
           onChange={this.handleInputChange.bind(this)}
           onKeyDown={this.handleSubmit.bind(this)}
         />
-        <button onClick={this.handleSubmit.bind(this)}>Search</button>
-        <div className='results_found'>{!(this.props.isFound) && <p>Sorry, The moive title you have searched for is not on this list</p>}</div>
-      </nav>
+        <button onClick={this.handleSubmit.bind(this)}>Add Moive</button>
+      </div>
     )
   }
+
 
 };
 
 
-export default Search;
+
+export default MoiveAdder;

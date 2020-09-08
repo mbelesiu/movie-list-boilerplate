@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 var MovieList = ({ movies }) => (
   <div className='movie-list'>
+    <p></p>
     <ul>
       {movies.map((movies) =>
 
